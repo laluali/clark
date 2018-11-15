@@ -1,0 +1,60 @@
+{{yield}}
+
+<div class="m-3">
+  <div class="">
+    <span class="q-header">
+      {{#unless backDisabled}}
+        <button type="button" class="col-sm-1 btn-slide-nav" onclick={{action 'onBackClick' preventDefault=true}}>
+          {{fa-icon 'arrow-left' size='1x'}}
+        </button>
+      {{/unless}}
+      <h5 class="col-sm-10 text-center question">{{questionObj.headline}}</h5>
+      {{#unless forwardDisabled}}
+        <button type="button" class="col-sm-1 btn-slide-nav" onclick={{action 'onNextClick' preventDefault=true}}>
+          {{fa-icon 'arrow-right' size='1x'}}
+        </button>
+      {{/unless}}
+    </span>
+    <span class="w-100">
+      <div class="q-flex">
+      {{#if ( and (eq questionObj.multiline "true")
+              (eq questionObj.question_type "text"))}}
+        {{question-text-area-option
+          model=model
+          dyLabel=questionObj.identifier
+          dyName=questionObj.headline }}
+      {{else if (eq questionObj.question_type "multiple-choice") }}
+          {{#each questionObj.choices as |choice index|}}
+            <div class="inputGroup">
+              <input id={{concat elementId choice.label}}
+                     name={{questionObj.identifier}}
+                     value={{choice.value}}
+                     onclick={{action "selection" questionObj currentSlide preventDefault=true}}
+                     type="radio"/>
+              <span class=" d-none d-sm-block d-md-block d-lg-block text-center">
+                <span class="trans-2s question-option-image q-option {{concat questionObj.identifier '_' index}}"></span>
+              </span>
+              <label for="{{concat elementId choice.label}}">{{choice.label}}</label>
+            </div>
+          {{/each}}
+      {{else if showDate }}
+        {{question-date-option
+          model=model
+          dyLabel=questionObj.identifier
+          dyName=questionObj.headline }}
+      {{else if (and (eq questionObj.multiline  "false")
+        (eq questionObj.question_type  "text")) }}
+        {{question-text-option
+          model=model
+          dyLabel=questionObj.identifier
+          dyName=questionObj.headline }}
+      {{/if}}
+      </div>
+    </span>
+    <!--<span class="col-sm-1">
+
+    </span>-->
+  </div>
+</div>
+
+

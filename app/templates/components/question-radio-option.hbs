@@ -1,0 +1,42 @@
+{{yield}}
+<div class="row">
+  <div class="d-block d-sm-none">
+    {{input
+      id=(concat elementId dyLabel)
+      value=dyValue
+      type="radio"
+      name=dyName
+      click=(action "selection")
+    }}
+    <label for={{concat elementId dyLabel}}>{{dyLabel}}</label>
+  </div>
+  <div class="d-none d-md-none d-lg-none d-sm-block col-sm-12">
+    {{input
+      id=(concat elementId dyLabel)
+      value=dyValue
+      type="radio"
+      name=dyName
+      click=(action "selection")
+    }}
+    <label for={{concat elementId dyLabel}}>{{dyLabel}}</label>
+  </div>
+  <div class="d-none d-sm-none d-lg-none d-md-block col-md-12">
+    {{input
+      id=(concat elementId dyLabel)
+      value=dyValue
+      type="radio"
+      name=dyName
+      click=(action "selection")
+    }}
+    <label for={{concat elementId dyLabel}}>{{dyLabel}}</label>
+  </div>
+  <div class="d-none d-md-none d-sm-none d-lg-block col-lg-12">
+    <div class="inputGroup">
+      <input id={{concat elementId choice.label}}
+             name={{questionObj.identifier}}
+             value={{choice.value}}
+             type="radio"/>
+      <label for="{{concat elementId choice.label}}">{{choice.label}}</label>
+    </div>
+  </div>
+</div>

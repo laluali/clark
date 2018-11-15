@@ -1,0 +1,40 @@
+{{yield}}
+<div class="well">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <h2 class="m-2 text-center product-name">{{model.questionnaire.name}}</h2>
+      <form>
+        {{#slick-slider
+          autoplay=false
+          arrows=false
+          initialSlide=0
+          centreMode=true
+          slidesToShow=1
+          slidesToScroll=1
+          swipe=false
+          speed=2300
+          infinite=false
+          beforeChange="beforeChange"
+          afterChange="afterChange"
+        }}
+          {{#each model.questionnaire.questions as |question index|}}
+              <div class="box" id={{question.identifier}}>
+                {{#question-details
+                  model=form
+                  currentSlide=index
+                  questionObj=question
+                }}
+                {{/question-details}}
+              </div>
+          {{/each}}
+        {{/slick-slider}}
+      </form>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+  </div>
+
+</div>

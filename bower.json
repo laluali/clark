@@ -1,0 +1,6 @@
+{
+  "name": "questionnaire-app",
+  "dependencies": {
+    "slick-carousel": "^1.8.1"
+  }
+}
