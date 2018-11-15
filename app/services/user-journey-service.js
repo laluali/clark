@@ -47,6 +47,10 @@ export default Service.extend({
     }
   },
 
+  hasAnswerObject(key){
+    return get(this.answerObject, key);
+  },
+
   setSlidesJourney(object) {
     return this.slidesJourney.addObject(object);
   },
@@ -57,6 +61,10 @@ export default Service.extend({
 
   getIndexOfSlidesJourney(identifier) {
     return this.slidesJourney.indexOf(identifier);
-  }
+  },
+
+  cutArray(length){
+    return this.slidesJourney.length = length;
+  },
 
 });
