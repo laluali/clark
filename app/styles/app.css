@@ -138,6 +138,9 @@ a:hover{
   text-align: center;
 }
 
+#q-banner{
+  background-color: transparent !important;
+}
 /*Carousel Design Ends*/
 /*Design Class Core Starts*/
 .q-text-input,.q-text-area-input
@@ -384,7 +387,6 @@ a:hover{
   .inputGroup input:checked ~ label {
     background-color: #cafccc;
     border-color: #cafccc;
-    margin: unset;
   }
   .q-flex{
     display: flex;

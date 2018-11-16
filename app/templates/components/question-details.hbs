@@ -31,9 +31,9 @@
                      value={{choice.value}}
                      onclick={{action "selection" questionObj currentSlide preventDefault=true}}
                      type="radio"/>
-              <span class=" d-none d-sm-block d-md-block d-lg-block text-center">
-                <span class="trans-2s question-option-image q-option {{concat questionObj.identifier '_' index}}"></span>
-              </span>
+              <label id='q-banner' for="{{concat elementId choice.label}}" class="d-none d-sm-block d-md-block d-lg-block text-center">
+                <svg class="trans-2s question-option-image q-option {{concat questionObj.identifier '_' index}}"></svg>
+              </label>
               <label for="{{concat elementId choice.label}}">{{choice.label}}</label>
             </div>
           {{/each}}

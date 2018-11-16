@@ -9,6 +9,7 @@ export default Component.extend({
   questionObj:null,
   backDisabled: null,
   forwardDisabled: null,
+  errorMessage:null,
 
   didReceiveAttrs(){
     this._super(...arguments);
@@ -25,11 +26,12 @@ export default Component.extend({
 
   actions:{
     selection (question, currentSlide, $event){
-      if(this.userService.hasAnswerObject(currentSlide)
-        && (this.userService.getAnswerObject(currentSlide) !== $event.target.value)){
-        this.userService.cutArray(currentSlide);
+      if((this.userService.hasAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide)))
+        && (this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide)) !== $event.target.value)){
+        this.userService.cutArray(this.userService.getIndexOfSlidesJourney(currentSlide));
+        this.userService.setAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide), $event.target.value);
       } else {
-        this.userService.setAnswerObject(currentSlide, $event.target.value);
+        this.userService.setAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide), $event.target.value);
       }
 
       if(question.jumps.length>0){
@@ -59,8 +61,8 @@ export default Component.extend({
     onNextClick(){
       this.userService.setCurrentSlickDetails('direction', 1);
       let currentSlideIndex = this.userService.getCurrentSlickDetails('currentSlide');
-      if(this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== ''
-        && this.userService.getAnswerObject(currentSlideIndex) !== undefined){
+      if(this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== undefined
+          && this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== ''){
         this.jumpToSlide(++currentSlideIndex);
       }
     }
