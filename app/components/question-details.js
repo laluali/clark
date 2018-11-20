@@ -26,14 +26,7 @@ export default Component.extend({
 
   actions:{
     selection (question, currentSlide, $event){
-      if((this.userService.hasAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide)))
-        && (this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide)) !== $event.target.value)){
-        this.userService.cutArray(this.userService.getIndexOfSlidesJourney(currentSlide));
-        this.userService.setAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide), $event.target.value);
-      } else {
-        this.userService.setAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide), $event.target.value);
-      }
-
+      this.userService.setAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlide), $event.target.value);
       if(question.jumps.length>0){
         let element = $('#'+$event.target.name)[0];
         question.jumps.forEach(
@@ -54,15 +47,15 @@ export default Component.extend({
 
     onBackClick(){
       this.userService.setCurrentSlickDetails('direction', 0);
-      let slideJourneyIndex = this.userService.getIndexOfSlidesJourney(this.userService.getCurrentSlickDetails('currentSlide'));
-      this.jumpToSlide(this.userService.getValAtIndexSlidesJourney(--slideJourneyIndex));
+      this.userService.cutArray();
+      this.jumpToSlide(this.userService.getValAtIndexSlidesJourney(this.userService.getLengthOfSlidesJourney()-1));
     },
 
     onNextClick(){
       this.userService.setCurrentSlickDetails('direction', 1);
       let currentSlideIndex = this.userService.getCurrentSlickDetails('currentSlide');
-      if(this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== undefined
-          && this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== ''){
+      if(this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== ''
+      && this.userService.getAnswerObject(this.userService.getIndexOfSlidesJourney(currentSlideIndex)) !== undefined){
         this.jumpToSlide(++currentSlideIndex);
       }
     }

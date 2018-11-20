@@ -63,8 +63,12 @@ export default Service.extend({
     return this.slidesJourney.indexOf(identifier);
   },
 
-  cutArray(length){
-    return this.slidesJourney.length = length;
+  cutArray(){
+    return this.slidesJourney.length = this.slidesJourney.length-1;
   },
+
+  getLengthOfSlidesJourney(){
+    return this.slidesJourney.length;
+  }
 
 });

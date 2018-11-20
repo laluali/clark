@@ -1,0 +1,27 @@
+{{yield}}
+<h1>Product survey</h1>
+<button onclick="previous();">Prev</button>
+<button onclick="next();">Next</button>
+<div class="flip-block">
+{{#each model.questionnaire.questions as |question index|}}
+  <div class="flip-page" id={{question.identifier}}>
+   {{question}}
+  </div>
+{{/each}}
+</div>
+
+  <div class="flip-block">
+    <div class="flip-page">
+      <h1>Lalit</h1>
+    </div>
+    <div class="flip-page">
+      <h1>Chaudhary</h1>
+    </div>
+    <div class="flip-page">
+      <h1>Chaudhary1</h1>
+    </div>
+    <div class="flip-page">
+      <h1>Chaudhary2</h1>
+    </div>
+
+  </div>
