@@ -317,6 +317,10 @@ a:hover{
     margin-right: unset;
     margin-left: unset;
   }
+  /*Flip*/
+  .flip-page{
+    width: 100%;
+  }
 }
 
 /*Tablet and above*/
@@ -382,6 +386,7 @@ a:hover{
     flex-wrap: wrap;
     justify-content: center;
   }
+
 }
 
 /*Desktop Design*/
@@ -518,22 +523,35 @@ a:hover{
 
 /*FLIP CSS*/
 .flip-block{
-  position:fixed;
+  position:inherit;
   margin-right: 100px;
-  background-color: lightgoldenrodyellow;
+  background-color: transparent;
   width: 100%;
   color: green;
-  height: auto;
+  height: 500px;
   left:100px;
+  text-align: center;
 }
 
 .flip-page{
   position:absolute;
-  width:200px;
-  height:250px;
+  margin: 20px 20px;
+  width:400px;
   background-color: white;
   box-shadow: 1px 1px 10px 1px grey;
   border-radius: 5px;
-
+  height: 450px;
 }
 
+.product-action-item{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  float: right;
+}
+
+@media (max-width: 760px) {
+  .product-action-item{
+    float: none;
+  }
+}
