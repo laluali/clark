@@ -1,6 +1,4 @@
 {{yield}}
-<h1>Product survey</h1>
-
   <div class="flip-block">
     {{#each masterSlide as |slide index|}}
       <div class="flip-page" id={{concat 'slide' index}}>
@@ -9,22 +7,24 @@
         {{/each}}
       </div>
     {{/each}}
-
-    <div class="d-none d-md-block d-lg-block d-sm-none product-story">
-      <div class="well">
-        <div id="product-drop-zone" class="drop-zone"></div>
-        <h1>jjj</h1>
-      </div>
+  </div>
+  <div class="d-none d-md-block d-lg-block d-sm-none product-story">
+    <div class="well">
+      <div id="product-drop-zone" class="drop-zone"></div>
     </div>
   </div>
   <div class="product-action-item">
-    <button {{action 'previous' preventDefault=true}}>Prev</button>
+    <button class="btn-slide-nav" {{action 'previous' preventDefault=true}}>
+      {{fa-icon 'arrow-left' size='3x'}}
+    </button>
     <div class="d-none d-md-none d-lg-none d-sm-block product-story">
       <div class="well">
         <div id="product-drop-zone" class="drop-zone"></div>
         <h1>jjj</h1>
       </div>
     </div>
-    <button {{action 'next' preventDefault=true}}>Next</button>
+    <button class="btn-slide-nav" {{action 'next' preventDefault=true}}>
+      {{fa-icon 'arrow-right' size='3x'}}
+    </button>
   </div>
 

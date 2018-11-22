@@ -108,19 +108,16 @@ a:hover{
   100% {fill:gray; left:0px; top:0px;}
 }
 
-.btn-slide-nav:disabled{
-  outline: transparent;
-  cursor: not-allowed;
-}
-
 .btn-slide-nav svg path{
   fill: gray;
-  transition: all .2s ease-in-out;
+
 }
 
 .btn-slide-nav:disabled{
   fill: lightgrey;
   animation: none;
+  outline: transparent;
+  cursor: not-allowed;
 }
 
 .btn-slide-nav:hover svg path{
@@ -546,8 +543,8 @@ a:hover{
 .product-action-item{
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
-  float: right;
+  justify-content: space-between;
+  width: 400px;
 }
 
 @media (max-width: 760px) {

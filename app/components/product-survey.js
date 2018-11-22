@@ -1,11 +1,15 @@
 import Component from '@ember/component';
 import $ from 'jquery';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
+import { run } from '@ember/runloop';
 
 export default Component.extend({
   model:null,
   scale:1,
   left:20,
+  backDisabled: null,
+  forwardDisabled: null,
+  currentSlide:0,
   slide_1 : ['list_12111610','list_12111777', 'list_12110966', 'list_12110967'],
   slide_2 : ['list_12110968','list_13907264', 'list_12111854'],
   slide_3 : ['list_12110972','list_13913438', 'list_12110969'],
@@ -16,12 +20,6 @@ export default Component.extend({
 
   init(){
     this._super(...arguments);
-
-
-  },
-  didReceiveAttrs(){
-    this._super(...arguments);
-
     for(var x =1;x<=6;x++){
       var tempArr = [];
       var tempSlide = 'slide_'+x;
@@ -35,12 +33,14 @@ export default Component.extend({
         });
       this.masterSlide.push(tempArr);
     }
+    set(this,'backDisabled',true);
+  },
+  didReceiveAttrs(){
+    this._super(...arguments);
   },
 
   didRender() {
-
     var pages = $('.flip-page');
-    //for(var i = 0;i<pages.length;i++){
     pages.each(
       (i, page) =>{
         pages[i].classList.add('page'+i);
@@ -52,18 +52,31 @@ export default Component.extend({
         }
       }
     );
-
-
+    run.later(this, function() {
+      $('html, body').animate({scrollTop: '+=100px'}, 800);
+    }, 2000);
   },
 
  actions:{
    next(){
-     this.forward($('.flip-page'));
+     if(this.currentSlide<this.masterSlide.length-1){
+       ++this.currentSlide;
+       this.forward($('.flip-page'));
+     }else{
+       //TODO showError();
+     }
    },
 
    previous(){
-     this.reverse($('.flip-page'));
+     if(this.currentSlide>0){
+       --this.currentSlide;
+       this.reverse($('.flip-page'));
+       //TODO showError();
+     }
    },
+   selection (question, currentSlide, $event){
+
+   }
  },
 
 
