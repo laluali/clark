@@ -524,7 +524,7 @@ a:hover{
   margin-right: 100px;
   background-color: transparent;
   width: 100%;
-  color: green;
+  color: darkslategrey;
   height: 500px;
   left:100px;
   text-align: center;
@@ -540,11 +540,101 @@ a:hover{
   height: 450px;
 }
 
+/*.flip-option-radio input[type="radio"]{
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.flip-option-radio label:first-of-type{
+  border: 1px solid darkgray;
+  border-radius: 5px 0 0 5px;
+  cursor: pointer;
+}
+
+.flip-option-radio label{
+  border: 1px solid darkgray;
+  cursor: pointer;
+}
+
+.flip-option-radio label:last-of-type{
+  border: 1px solid darkgray;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+*/
+
+.flip-option-radio {
+  margin: 0 0 1.5rem;
+  box-sizing: border-box;
+  font-size: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+.flip-option-radio input {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -9999px;
+}
+.flip-option-radio input + label {
+  margin: 0;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  border: solid 1px #DDD;
+  background-color: #FFF;
+  font-size: 0.8rem;
+  text-align: center;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out;
+  width: 80%;
+  /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+  /*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+  /* ----- */
+}
+.flip-option-radio input + label:first-of-type {
+  border-radius: 6px 0 0 6px;
+  border: solid 1px #DDD;
+}
+.flip-option-radio input + label:last-of-type {
+  border-radius: 0 6px 6px 0;
+  border: solid 1px #DDD;
+}
+.flip-option-radio input:hover + label {
+  border-color: #213140;
+}
+.flip-option-radio input:checked + label {
+  background-color: #4B9DEA;
+  color: #FFF;
+  box-shadow: 0 0 10px rgba(102, 179, 251, 0.5);
+  border-color: #4B9DEA;
+  z-index: 1;
+}
+.flip-option-radio input:focus + label {
+  outline: dotted 1px #CCC;
+  outline-offset: .45rem;
+}
+
+
+
 .product-action-item{
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   width: 400px;
+}
+
+.question-panel{
+  margin: 2px;
+  border-top: 1px solid lightgrey;
+  padding: 10px;
+}
+
+.question-panel:first-child{
+  border-top: none;
 }
 
 @media (max-width: 760px) {
