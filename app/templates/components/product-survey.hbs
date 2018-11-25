@@ -1,84 +1,107 @@
 {{yield}}
-<div class="">
-  <div class="flip-block">
-    {{#each masterSlide as |slide index|}}
-      <div class="flip-page" id={{concat 'slide' index}}>
-        {{#each slide as |question|}}
-          <div class="question-panel">
-            {{question.headline}}
-            <br>
-            {{#if ( and (eq question.multiline "true")
-                    (eq question.question_type "text"))}}
-              {{question-text-area-option
-                model=model
-                dyLabel=question.identifier
-                dyName=question.headline }}
-            {{else if (eq question.question_type "multiple-choice") }}
-            <div class="flip-option-radio">
-              {{#if (eq question.choices.length 4)}}
-
-                  {{#each question.choices as |choice index|}}
+<div class="c-bg">
+    <div class="inputGroup flex-nowrap landing-question">
+      <span class="m-2 text-center product-name">{{landingQuestionObj.headline}}</span>
+      <div class="d-flex flex-row flex-nowrap">
+        {{#each landingQuestionObj.choices as |choice index|}}
+          <span>
+            <input id={{concat elementId choice.label}}
+                   name={{landingQuestionObj.identifier}}
+                   value={{choice.value}}
+                   onclick={{action "selection" landingQuestionObj currentSlide preventDefault=true}}
+                   type="radio"/>
+            <label id='q-banner' for="{{concat elementId choice.label}}" class="d-none d-sm-block d-md-block d-lg-block text-center">
+              <svg class="trans-2s question-option-image q-option {{concat landingQuestionObj.identifier '_' index}}"></svg>
+            </label>
+            <label for="{{concat elementId choice.label}}">{{choice.label}}</label>
+          </span>
+        {{/each}}
+      </div>
+    </div>
+    <div class="flip-block">
+      {{#each masterSlide as |slide index|}}
+        <div class="flip-page" id={{concat 'slide' index}}>
+          {{#each slide as |question slideIndex|}}
+            <div id={{question.identifier}} class="question-panel">
+              <span class="question">{{question.headline}}</span>
+              {{#if ( and (eq question.multiline "true")
+                      (eq question.question_type "text"))}}
+                {{question-text-area-option
+                  model=model
+                  dyLabel=question.identifier
+                  dyName=question.headline }}
+              {{else if (eq question.question_type "multiple-choice") }}
+                {{#if (eq question.choices.length 4)}}
+                  <div class="flip-select-option">
+                    <select onchange={{action "selection" question currentSlide preventDefault=true}}>
+                    {{#each question.choices as |choice|}}
+                      <option value={{choice.value}}>{{choice.label}}</option>
+                    {{/each}}
+                    </select>
+                  </div>
+                {{else if (lt question.choices.length 4)}}
+                  <div class="flip-option-radio">
+                    {{#each question.choices as |choice|}}
                       <input id={{concat question.identifier choice.label}}
                              name={{question.identifier}}
                              value={{choice.value}}
                              onclick={{action "selection" question currentSlide preventDefault=true}}
                              type="radio"/>
-                      <label id='q-banner' for="{{concat elementId choice.label}}" class="d-none d-sm-block d-md-block d-lg-block text-center">
-                        <svg class="trans-2s question-option-image q-option {{concat question.identifier '_' index}}"></svg>
-                        <sub>{{choice.label}}</sub>
-                      </label>
-                  {{/each}}
+                      <label for="{{concat question.identifier choice.label}}">{{choice.label}}</label>
+                    {{/each}}
+                  </div>
+                {{else if (gt question.choices.length 4)}}
+                  <div class="gt-4-img">
+                    <div class="wave">
+                      <img class={{question.identifier}}  alt="">
+                    </div>
+                  </div>
+                  <div class="flip-option-radio">
+                    {{#each question.choices as |choice|}}
+                      <input id={{concat question.identifier choice.label}}
+                           name={{question.identifier}}
+                           value={{choice.value}}
+                           onclick={{action "selection" question currentSlide preventDefault=true}}
+                           type="radio"/>
+                      <label for="{{concat question.identifier choice.label}}">{{choice.label}}</label>
+                    {{/each}}
 
-              {{else if (lt question.choices.length 4)}}
-                {{#each question.choices as |choice index|}}
-                  <input id={{concat question.identifier choice.label}}
-                         name={{question.identifier}}
-                         value={{choice.value}}
-                         onclick={{action "selection" question currentSlide preventDefault=true}}
-                         type="radio"/>
-                  <label for="{{concat question.identifier choice.label}}">{{choice.label}}</label>
-                {{/each}}
-                {{else if (gt question.choices.length  4)}}
-
-                    <h2>Greater than 4</h2>
-                    <input type="range" name="points" min="0" max="{{question.choices.length}}">
-
+                  </div>
+                {{/if}}
+              {{else if showDate }}
+                {{question-date-option
+                  model=model
+                  dyLabel=question.identifier
+                  dyName=question.headline }}
+              {{else if (and (eq question.multiline  "false")
+                (eq question.question_type  "text")) }}
+                {{question-text-option
+                  model=model
+                  dyLabel=question.identifier
+                  dyName=question.headline }}
               {{/if}}
             </div>
-            {{else if showDate }}
-              {{question-date-option
-                model=model
-                dyLabel=question.identifier
-                dyName=question.headline }}
-            {{else if (and (eq question.multiline  "false")
-              (eq question.question_type  "text")) }}
-              {{question-text-option
-                model=model
-                dyLabel=question.identifier
-                dyName=question.headline }}
-            {{/if}}
-          </div>
-        {{/each}}
-      </div>
-    {{/each}}
-  </div>
-  <div class="d-none d-md-block d-lg-block d-sm-none product-story">
-    <div class="well">
-      <div id="product-drop-zone" class="drop-zone"></div>
+          {{/each}}
+        </div>
+      {{/each}}
     </div>
-  </div>
-  <div class="product-action-item">
-    <button class="btn-slide-nav" {{action 'previous' preventDefault=true}}>
-      {{fa-icon 'arrow-left' size='3x'}}
-    </button>
-    <div class="d-none d-md-none d-lg-none d-sm-block product-story">
+    <div class="d-none d-md-block d-lg-block d-sm-none product-story">
       <div class="well">
         <div id="product-drop-zone" class="drop-zone"></div>
-        <h1>jjj</h1>
       </div>
     </div>
-    <button class="btn-slide-nav" {{action 'next' preventDefault=true}}>
-      {{fa-icon 'arrow-right' size='3x'}}
-    </button>
-  </div>
+    <div class="product-action-item">
+      <button class="btn-slide-nav" {{action 'previous' preventDefault=true}}>
+        {{fa-icon 'arrow-left' size='3x'}}
+      </button>
+      <div class="d-none d-md-none d-lg-none d-sm-block product-story">
+        <div class="well">
+          <div id="product-drop-zone" class="drop-zone"></div>
+          <h1>jjj</h1>
+        </div>
+      </div>
+      <button class="btn-slide-nav" {{action 'next' preventDefault=true}}>
+        {{fa-icon 'arrow-right' size='3x'}}
+      </button>
+    </div>
 </div>
