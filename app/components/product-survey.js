@@ -110,10 +110,6 @@ export default Component.extend({
    select(question){
     console.log(question);
    },
-   sliderMoved(e) {
-     console.log(e.target.value)
-     // do something with the value
-   },
    selection (question, currentSlide, $event){
      if(question.identifier === get(this, 'landingQuestion')){
        $('.flip-block').css('visibility','visible');
@@ -141,6 +137,7 @@ export default Component.extend({
          }
        )
      }
+     this.addImageToStory(question.identifier+'_'+question.choices.findIndex(x=>x.label===$event.target.value));
    },
  },
 
@@ -231,5 +228,10 @@ export default Component.extend({
   computeValue(value){
     var x = value.split('p');
     return parseInt(x[0]);
+  },
+
+  addImageToStory(className){
+    $('#product-drop-zone').removeClass();
+    $('#product-drop-zone').addClass(className+'_drop');
   }
 });
